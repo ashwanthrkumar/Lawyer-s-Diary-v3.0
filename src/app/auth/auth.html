@@ -1,0 +1,42 @@
+<div class="auth">
+    <div class="container mt-5" style="max-width: 500px;">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">
+              {{ isLoginMode ? 'Sign In' : 'Sign Up' }}
+            </h3>
+      
+            <form (ngSubmit)="onSubmit()">
+              <div class="form-group mb-3">
+                <label>Email address</label>
+                <input type="email" class="form-control" [(ngModel)]="email" name="email" required>
+              </div>
+      
+              <div class="form-group mb-3">
+                <label>Password</label>
+                <input type="password" class="form-control" [(ngModel)]="password" name="password" required>
+              </div>
+      
+              <div *ngIf="!isLoginMode" class="form-group mb-3">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+              </div>
+      
+              <button type="submit" class="btn btn-primary w-100">
+                {{ isLoginMode ? 'Sign In' : 'Sign Up' }}
+              </button>
+            </form>
+      
+            <div class="text-center mt-3">
+              <small>
+                {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
+                <a href="#" (click)="toggleMode($event)">
+                  {{ isLoginMode ? "Sign Up" : "Sign In" }}
+                </a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+</div>

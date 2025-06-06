@@ -1,20 +1,72 @@
 <div class="dashboard">
-    <h5>Hello, {{userName}}</h5>
 
-<!-- <ul>
-  <li *ngFor="let user of users$ | async">
-    {{ user.name }} - {{ user.email }}
-  </li>
-</ul> -->
+  <div class="row">
+    <div class="col-md-3" *ngIf="caseStats">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Total Cases</h5>
+          <p class="card-text">{{ caseStats.total }}</p>
+        </div>
+      </div>
+    </div>
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <div class="col-md-3" *ngIf="caseStats">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Upcoming Hearings</h5>
+          <p class="card-text">{{ caseStats.upcoming }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3" *ngIf="caseStats">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Closed Cases</h5>
+          <p class="card-text">{{ caseStats.closed }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3" *ngIf="caseStats">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Pending Updates</h5>
+          <p class="card-text">{{ caseStats.pending }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+  <h2 class="section-title mt-5">🗓️ Upcoming Hearings</h2>
+
+  <div *ngIf="upcomingHearings.length > 0; else noHearings">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Case Title</th>
+          <th>Client Name</th>
+          <th>Date & Time</th>
+          <th>Court Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let case of upcomingHearings">
+          <td>{{ case.title || '—' }}</td>
+          <td>{{ case.clientName || '—' }}</td>
+          <td>{{ case.hearingDate | date: 'fullDate' }} {{ case.hearingTime || '' }}</td>
+          <td>{{ case.court || '—' }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm">View Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noHearings>
+    <p class="text-muted">No upcoming hearings in the next 7 days.</p>
+  </ng-template>
 
 </div>

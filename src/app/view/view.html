@@ -17,7 +17,9 @@
             <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Title</th>
             <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Court</th>
             <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Status</th>
-  
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Case Number</th>
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Hearing Date</th>
+            
             <th class="py-3 px-4 text-left">Actions</th>
           </tr>
         </thead>
@@ -31,7 +33,9 @@
             <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.title }}</td>
             <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.court }}</td>
             <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.status }}</td>
-  
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.caseNumber }}</td>
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.hearingDate }}</td>
+            
             <td class="py-3 px-4 flex space-x-2">
               <!-- Edit button (opens custom edit modal) -->
               <button
@@ -101,6 +105,15 @@
                   <label for="statusInput" class="label-custom">Status</label>
                   <input id="statusInput" class="input-custom" [(ngModel)]="editItem.status" name="status" />
                 </div>
+                <div class="form-group-custom">
+                  <label for="caseNumberInput" class="label-custom">Case Number</label>
+                  <input id="caseNumberInput" class="input-custom" [(ngModel)]="editItem.caseNumber" name="caseNumber" />
+                </div>
+                <div class="form-group-custom">
+                  <label for="hearingDateInput" class="label-custom">Hearing Date</label>
+                  <input id="hearingDateInput" type="date" class="input-custom" [(ngModel)]="editItem.hearingDate" name="hearingDate" />
+                </div>
+                
               </div>
             </div>
           </div>

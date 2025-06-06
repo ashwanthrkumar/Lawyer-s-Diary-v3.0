@@ -59,12 +59,12 @@ export class NextHearingDate implements OnInit {
       alert('Please select a case and date.');
       return;
     }
-
+  
     try {
       const caseRef = doc(this.firestore, 'cases', this.selectedCaseId);
       await updateDoc(caseRef, {
-        hearingDate: Timestamp.fromDate(new Date(this.newHearingDate)),
-        updatedAt: Timestamp.now()
+        hearingDate: this.newHearingDate, // <-- save as "2025-06-17"
+        updatedAt: Timestamp.now() // still storing this as Timestamp for tracking
       });
       alert('Hearing date updated successfully.');
     } catch (error) {
@@ -72,4 +72,5 @@ export class NextHearingDate implements OnInit {
       alert('Failed to update hearing date.');
     }
   }
+  
 }

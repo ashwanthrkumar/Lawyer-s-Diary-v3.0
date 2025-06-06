@@ -11,6 +11,9 @@ export class FirestoreService {
     const userDoc = doc(this.firestore, `users/${uid}`);
     return setDoc(userDoc, data);
   }
+  getFirestore() {
+    return this.firestore;
+  }
   getUsers(): Observable<any[]> {
     const usersRef = collection(this.firestore, 'users');
     return collectionData(usersRef, { idField: 'id' });

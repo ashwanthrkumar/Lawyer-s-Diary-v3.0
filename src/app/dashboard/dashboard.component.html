@@ -58,7 +58,7 @@
           <td>{{ case.hearingDate | date: 'fullDate' }} {{ case.hearingTime || '' }}</td>
           <td>{{ case.court || '—' }}</td>
           <td>
-            <button class="btn btn-primary btn-sm">View Details</button>
+            <button class="btn btn-primary btn-sm" (click)="openCaseDetails(case)">View Details</button>
           </td>
         </tr>
       </tbody>

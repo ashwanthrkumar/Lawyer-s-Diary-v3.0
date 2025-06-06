@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, getDocs, updateDoc, doc } from '@angular/fire/firestore';
 import { Timestamp } from 'firebase/firestore';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-update-hearing-date',
@@ -64,7 +65,8 @@ export class NextHearingDate implements OnInit {
       const caseRef = doc(this.firestore, 'cases', this.selectedCaseId);
       await updateDoc(caseRef, {
         hearingDate: this.newHearingDate, // <-- save as "2025-06-17"
-        updatedAt: Timestamp.now() // still storing this as Timestamp for tracking
+        updatedAt: serverTimestamp()
+ // still storing this as Timestamp for tracking
       });
       alert('Hearing date updated successfully.');
     } catch (error) {

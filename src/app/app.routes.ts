@@ -5,7 +5,7 @@ import { EnterDetails } from './enter-details/enter-details.component';
 import { AddCaseClientComponent } from './add-case-client/add-case-client.component';
 import { NextHearingDate } from './next-hearing-date/next-hearing-date.component';
 import { View } from './view/view.component';
-//import { Calendar } from './calender/calender';
+import { CalenderComponent } from './calender/calender.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'auth', pathMatch: 'full' }, // ✅ should redirect to login
@@ -17,6 +17,6 @@ export const routes: Routes = [
     {path:'addNew/:form',component:AddCaseClientComponent},
     {path:'nextHearing',component:NextHearingDate},
     {path:'view/:type',component:View},
-   // {path:'calender',component:Calendar}
+    {path:'calender',component:CalenderComponent}
 
 ];

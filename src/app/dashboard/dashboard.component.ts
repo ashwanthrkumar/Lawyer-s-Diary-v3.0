@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { collection, getDocs } from '@angular/fire/firestore';
+import { CaseDetailsDialogComponent } from '../dialogs/case-details-dialog/case-details-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 interface Case {
   id: string;
@@ -14,12 +16,13 @@ interface Case {
   status: string;
   hearingDate?: string;
   hearingTime?: string;
+  caseNumber: string;
 }
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -32,7 +35,8 @@ export class Dashboard implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +74,7 @@ export class Dashboard implements OnInit {
       return {
         id: doc.id,
         title: data['title'] || '',
+        caseNumber: data['caseNumber'] || '',
         clientId: data['clientId'] || '',
         clientName: clientsMap.get(data['clientId']) || 'Unknown',
         court: data['court'] || '',
@@ -93,5 +98,11 @@ export class Dashboard implements OnInit {
       pending: allCases.filter((c) => c.status.toLowerCase() === 'pending').length,
       upcoming: upcoming.length,
     };
+  }
+    openCaseDetails(caseItem: Case) {
+    this.dialog.open(CaseDetailsDialogComponent, {
+      width: '400px',
+      data: caseItem,
+    });
   }
 }

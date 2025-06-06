@@ -15,49 +15,61 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.currentUserSubject.asObservable();
 
+  private loggedInSubject = new BehaviorSubject<boolean>(!!sessionStorage.getItem('loggedInUserUID'));
+  public isLoggedIn$ = this.loggedInSubject.asObservable();
+
   constructor(private auth: Auth, private firestore: Firestore) {
-    // Listen for login/logout
     onAuthStateChanged(this.auth, (user) => {
       this.currentUserSubject.next(user);
 
       if (user) {
-        // Save email/UID in session storage
         sessionStorage.setItem('loggedInUserEmail', user.email ?? '');
         sessionStorage.setItem('loggedInUserUID', user.uid);
+        this.loggedInSubject.next(true); // ✅ trigger update
       } else {
         sessionStorage.removeItem('loggedInUserEmail');
         sessionStorage.removeItem('loggedInUserUID');
+        this.loggedInSubject.next(false); // ✅ trigger update
       }
     });
   }
 
-  // Access current user synchronously
   get currentUser(): User | null {
     return this.currentUserSubject.value;
   }
 
-  // Sign up method
   signup(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  // Login method
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  // Logout method
   logout() {
-    sessionStorage.clear();
-    return signOut(this.auth);
+    return signOut(this.auth).then(() => {
+      sessionStorage.clear();
+      this.loggedInSubject.next(false);
+    });
   }
 
-  // Optional helper: Get email from storage
+  setLoggedIn(uid: string) {
+    sessionStorage.setItem('loggedInUserUID', uid);
+    this.loggedInSubject.next(true);
+  }
+
   getLoggedInUserEmail(): string | null {
     return sessionStorage.getItem('loggedInUserEmail');
   }
+
   checkUserProfile(uid: string): Promise<boolean> {
     const userDocRef = doc(this.firestore, `users/${uid}`);
     return getDoc(userDocRef).then(docSnap => docSnap.exists());
+  }
+  getUserDetails(uid: string): Promise<any | null> {
+    const userDocRef = doc(this.firestore, `users/${uid}`);
+    return getDoc(userDocRef).then(docSnap => {
+      return docSnap.exists() ? docSnap.data() : null;
+    });
   }
 }

@@ -1,18 +1,34 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth';
 import { Router } from '@angular/router';
+import { FirestoreService } from '../services/firestore';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-header',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule,FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
-  standalone: true,
+  
 })
 export class Header {
-  constructor(private authService: AuthService, private router: Router) {}
+  userName: string | null = null;
+  isLoggedIn = false;
+  constructor(private authService: AuthService, private router: Router, private firestoreService: FirestoreService) {}
+  ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+    const storedDetails = sessionStorage.getItem('userDetails');
+    if (storedDetails) {
+      const userDetails = JSON.parse(storedDetails);
+      this.userName = userDetails.name || null;
+    }
+  }
   onLogout() {
     this.authService.logout().then(() => {
-      this.router.navigate(['/']); // Redirect to login after logout
+      this.router.navigate(['/auth']);
     });
   }
 }

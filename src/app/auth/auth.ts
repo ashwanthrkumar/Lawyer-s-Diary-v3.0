@@ -31,19 +31,26 @@ export class AuthComponent {
 
     if (this.isLoginMode) {
       this.authService.login(this.email, this.password)
-      .then(userCredential => {
-        const uid = userCredential.user?.uid;  // <-- define uid here
+      .then(async userCredential => {
+        const uid = userCredential.user?.uid;
         if (uid) {
           sessionStorage.setItem('uid', uid);
-          console.log('Login successful:', uid);
+          sessionStorage.setItem('loggedInUserUID', uid);  // Optional if not already set
   
-          this.authService.checkUserProfile(uid).then(exists => {
-            if (exists) {
-              this.router.navigate(['/dashboard']);
-            } else {
-              this.router.navigate(['/enter-details', uid]);
+          const userExists = await this.authService.checkUserProfile(uid);
+  
+          if (userExists) {
+            // ✅ Fetch user details
+            const userDetails = await this.authService.getUserDetails(uid);
+            if (userDetails) {
+              sessionStorage.setItem('userDetails', JSON.stringify(userDetails));
+              console.log('User details stored in session:', userDetails);
             }
-          });
+  
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/enter-details', uid]);
+          }
         } else {
           alert('UID not found. Login failed.');
         }

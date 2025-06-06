@@ -41,28 +41,31 @@
   <h2 class="section-title mt-5">🗓️ Upcoming Hearings</h2>
 
   <div *ngIf="upcomingHearings.length > 0; else noHearings">
-    <table class="table table-striped table-bordered">
-      <thead class="table-dark">
-        <tr>
-          <th>Case Title</th>
-          <th>Client Name</th>
-          <th>Date & Time</th>
-          <th>Court Name</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let case of upcomingHearings">
-          <td>{{ case.title || '—' }}</td>
-          <td>{{ case.clientName || '—' }}</td>
-          <td>{{ case.hearingDate | date: 'fullDate' }} {{ case.hearingTime || '' }}</td>
-          <td>{{ case.court || '—' }}</td>
-          <td>
-            <button class="btn btn-primary btn-sm" (click)="openCaseDetails(case)">View Details</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Wrap your table in this div for responsiveness -->
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Case Title</th>
+            <th>Client Name</th>
+            <th>Date & Time</th>
+            <th>Court Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let case of upcomingHearings">
+            <td>{{ case.title || '—' }}</td>
+            <td>{{ case.clientName || '—' }}</td>
+            <td>{{ case.hearingDate | date: 'fullDate' }} {{ case.hearingTime || '' }}</td>
+            <td>{{ case.court || '—' }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="openCaseDetails(case)">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <ng-template #noHearings>

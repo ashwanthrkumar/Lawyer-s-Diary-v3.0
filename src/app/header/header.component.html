@@ -28,14 +28,14 @@
           <a class="dropdown-item" [routerLink]="['../addNew', 'case']" (click)="collapseNavbar()">Add Case</a>
           <a class="dropdown-item" [routerLink]="['../addNew', 'client']" (click)="collapseNavbar()">Add Client</a>
           <a class="dropdown-item" [routerLink]="['/nextHearing']" (click)="collapseNavbar()">Update Hearing Date</a>
-          <a class="dropdown-item" [routerLink]="['/cases']" (click)="collapseNavbar()">View all cases</a>
+          <!-- <a class="dropdown-item" [routerLink]="['/view','case']" (click)="collapseNavbar()">View all cases</a> -->
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    </form> -->
     <button *ngIf="isLoggedIn" class="btn btn-danger" style="margin: 5px;" (click)="onLogout()">Logout</button>
   </div>
 </nav>

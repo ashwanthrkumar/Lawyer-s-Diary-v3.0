@@ -12,7 +12,7 @@ export class Header {
   constructor(private authService: AuthService, private router: Router) {}
   onLogout() {
     this.authService.logout().then(() => {
-      this.router.navigate(['/auth']); // Redirect to login after logout
+      this.router.navigate(['/']); // Redirect to login after logout
     });
   }
 }

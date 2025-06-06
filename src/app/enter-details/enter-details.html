@@ -1,0 +1,60 @@
+<div class="enter-details-container">
+    <h2>Complete Your Profile</h2>
+    <form (ngSubmit)="onSubmit()" #detailsForm="ngForm">
+  
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          class="form-control"
+          required
+          [(ngModel)]="name"
+          #nameInput="ngModel"
+        />
+        <div *ngIf="nameInput.invalid && nameInput.touched" class="error">
+          Full Name is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email (readonly)</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          class="form-control"
+          [value]="email"
+          readonly
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          class="form-control"
+          required
+          pattern="[0-9]{10}"
+          [(ngModel)]="phone"
+          #phoneInput="ngModel"
+        />
+        <div *ngIf="phoneInput.invalid && phoneInput.touched" class="error">
+          Enter a valid 10-digit phone number.
+        </div>
+      </div>
+  
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="detailsForm.invalid || isSaving"
+      >
+        {{ isSaving ? 'Saving...' : 'Save Details' }}
+      </button>
+  
+    </form>
+  </div>
+  

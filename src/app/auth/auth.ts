@@ -31,10 +31,23 @@ export class AuthComponent {
 
     if (this.isLoginMode) {
       this.authService.login(this.email, this.password)
-        .then(userCredential => {
-          console.log('Login successful:', userCredential.user)
-          this.router.navigate(['/dashboard'])
-        })
+      .then(userCredential => {
+        const uid = userCredential.user?.uid;  // <-- define uid here
+        if (uid) {
+          sessionStorage.setItem('uid', uid);
+          console.log('Login successful:', uid);
+  
+          this.authService.checkUserProfile(uid).then(exists => {
+            if (exists) {
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.router.navigate(['/enter-details', uid]);
+            }
+          });
+        } else {
+          alert('UID not found. Login failed.');
+        }
+      })
         .catch(error => {
           console.error('Login error:', error.message);
           alert(error.message);
@@ -48,7 +61,7 @@ export class AuthComponent {
       this.authService.signup(this.email, this.password)
         .then(userCredential => {
           console.log('Signup successful:', userCredential.user)
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/enter-details', userCredential.user.uid]);
         })
         .catch(error => {
           console.error('Signup error:', error.message);

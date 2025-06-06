@@ -1,0 +1,21 @@
+<div class="calendar-container">
+    <mwl-calendar-month-view
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-month-view>
+  
+    <div *ngIf="showDetails" class="event-details">
+      <h3>Case Details</h3>
+      <p><strong>Case Number:</strong> {{ selectedEvent?.meta.caseNumber }}</p>
+      <p><strong>Title:</strong> {{ selectedEvent?.meta.caseTitle }}</p>
+      <p><strong>Client Name:</strong> {{ selectedEvent?.meta.clientName }}</p>
+      <p><strong>Court:</strong> {{ selectedEvent?.meta.courtName }}</p>
+      <p><strong>Status:</strong> {{ selectedEvent?.meta.status }}</p>
+      <p><strong>Judge:</strong> {{ selectedEvent?.meta.judge }}</p>
+  
+      <button (click)="closeDetails()">Close</button>
+    </div>
+  </div>
+  

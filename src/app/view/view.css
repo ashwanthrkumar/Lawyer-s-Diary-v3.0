@@ -1,0 +1,238 @@
+/* General styling for the container */
+.container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+    font-family: 'Inter', sans-serif; /* Using Inter font */
+    color: #333;
+  }
+  
+  /* Heading styles */
+  h2 {
+    font-size: 2.25rem; /* Equivalent to text-3xl */
+    font-weight: 700; /* Equivalent to font-bold */
+    text-align: center;
+    margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+    color: #1a202c; /* Darker text for headings */
+  }
+  
+  /* Table container styling */
+  .overflow-x-auto {
+    overflow-x: auto;
+    background-color: #fff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Equivalent to shadow-lg */
+    border-radius: 0.75rem; /* Equivalent to rounded-xl */
+    padding: 1rem; /* Equivalent to p-4 */
+  }
+  
+  /* Table styling */
+  table {
+    min-width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #2563eb; /* Equivalent to bg-blue-600 */
+    color: #ffffff; /* Equivalent to text-white */
+  }
+  
+  th {
+    padding: 0.75rem 1rem; /* Equivalent to py-3 px-4 */
+    text-align: left;
+    font-weight: 600; /* Medium font weight for headers */
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid #e2e8f0; /* Equivalent to border-b border-gray-200 */
+  }
+  
+  tbody tr:hover {
+    background-color: #f9fafb; /* Equivalent to hover:bg-gray-50 */
+  }
+  
+  td {
+    padding: 0.75rem 1rem; /* Equivalent to py-3 px-4 */
+  }
+  
+  /* Button styling */
+  button {
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.5rem; /* rounded-lg */
+    font-weight: 700; /* font-bold */
+    transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    cursor: pointer;
+  }
+  
+  .bg-blue-500 { background-color: #3b82f6; color: white; }
+  .hover\:bg-blue-700:hover { background-color: #1d4ed8; }
+  
+  .bg-red-500 { background-color: #ef4444; color: white; }
+  .hover\:bg-red-700:hover { background-color: #dc2626; }
+  
+  /* Custom Modal Backdrop */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Slightly darker backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+    opacity: 0; /* Start hidden for animation */
+    animation: fadeIn 0.3s forwards; /* Fade in animation */
+  }
+  
+  /* Keyframe for fade-in effect */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Custom Modal Content Container */
+  .modal-content-container {
+    background: #ffffff;
+    padding: 1.5rem; /* Padding for the modal content */
+    border-radius: 0.75rem; /* Rounded corners */
+    width: 90%; /* Responsive width */
+    max-width: 500px; /* Max width for desktop */
+    z-index: 1001; /* Above the backdrop */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Stronger shadow */
+    transform: translateY(-20px); /* Start slightly above for subtle animation */
+    animation: slideIn 0.3s forwards; /* Slide in animation */
+  }
+  
+  /* Keyframe for slide-in effect */
+  @keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  /* Form styling within modal */
+  .modal-content-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Modal header styling */
+  .modal-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0; /* Light gray border */
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .modal-title-custom {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 600; /* font-semibold */
+    color: #2d3748; /* text-gray-800 */
+  }
+  
+  .close-button-custom {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: #a0aec0; /* text-gray-500 */
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .close-button-custom:hover {
+    color: #4a5568; /* text-gray-700 */
+  }
+  
+  /* Modal body styling */
+  .modal-body-custom {
+    padding-bottom: 1.5rem;
+  }
+  
+  .form-group-custom {
+    margin-bottom: 1rem;
+  }
+  
+  .label-custom {
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: #4a5568; /* text-gray-700 */
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-custom {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem; /* p-3 */
+    border: 1px solid #cbd5e0; /* border-gray-300 */
+    border-radius: 0.5rem; /* rounded-lg */
+    font-size: 1rem;
+    color: #2d3748; /* text-gray-800 */
+    background-color: #f7fafc; /* bg-gray-100 */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .input-custom:focus {
+    outline: none;
+    border-color: #6366f1; /* focus:border-indigo-500 */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); /* focus:ring focus:ring-indigo-200 */
+  }
+  
+  /* Modal footer styling */
+  .modal-footer-custom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem; /* space-x-3 */
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0; /* Light gray border */
+  }
+  
+  .button-primary-custom {
+    background-color: #2563eb; /* bg-blue-600 */
+    color: white;
+  }
+  
+  .button-primary-custom:hover {
+    background-color: #1d4ed8; /* hover:bg-blue-700 */
+  }
+  
+  .button-secondary-custom {
+    background-color: #a0aec0; /* bg-gray-400 */
+    color: white;
+  }
+  
+  .button-secondary-custom:hover {
+    background-color: #718096; /* hover:bg-gray-500 */
+  }
+  
+  .button-danger-custom {
+    background-color: #dc2626; /* bg-red-600 */
+    color: white;
+  }
+  
+  .button-danger-custom:hover {
+    background-color: #b91c1c; /* hover:bg-red-700 */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+    h2 {
+      font-size: 1.75rem;
+    }
+    .modal-content-container {
+      padding: 1rem;
+    }
+    .modal-title-custom {
+      font-size: 1.25rem;
+    }
+  }
+  

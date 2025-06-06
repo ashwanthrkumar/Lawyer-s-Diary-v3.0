@@ -1,32 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><img src="images/arclogo.png" height="60px"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Clients</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cases</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Calender</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="signup">Sign Up</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-<!-- Suggested code may be subject to a license. Learn more: ~LicenseLog:1315402484. -->
-<button *ngIf="isLoggedIn" class="btn btn-danger" style="margin: 5px;" (click)="onLogout()">Logout</button>
-    </div>
-  </nav>
+  <a class="navbar-brand" href="/"><img src="images/arclogo.png" height="60px"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['../view', 'clients']" (click)="collapseNavbar()">Clients</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['../view', 'cases']" (click)="collapseNavbar()">Cases</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Calender</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Quick Actions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['../addNew', 'case']" (click)="collapseNavbar()">Add Case</a>
+          <a class="dropdown-item" [routerLink]="['../addNew', 'client']" (click)="collapseNavbar()">Add Client</a>
+          <a class="dropdown-item" [routerLink]="['/nextHearing']" (click)="collapseNavbar()">Update Hearing Date</a>
+          <a class="dropdown-item" [routerLink]="['/cases']" (click)="collapseNavbar()">View all cases</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <button *ngIf="isLoggedIn" class="btn btn-danger" style="margin: 5px;" (click)="onLogout()">Logout</button>
+  </div>
+</nav>

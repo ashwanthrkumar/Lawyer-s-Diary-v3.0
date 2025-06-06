@@ -1,0 +1,81 @@
+<div class="container">
+    <h2>Add New Client & Case</h2>
+  
+    <!-- Client Form -->
+    <form (ngSubmit)="addClient()" *ngIf="!clientAdded">
+      <h3>Client Details</h3>
+      <label>
+        Name:
+        <input type="text" [(ngModel)]="clientName" name="clientName" required />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input type="email" [(ngModel)]="clientEmail" name="clientEmail" required />
+      </label>
+      <br />
+      <label>
+        Phone:
+        <input type="text" [(ngModel)]="clientPhone" name="clientPhone" />
+      </label>
+      <br />
+      <button type="submit" [disabled]="loading">Add Client</button>
+    </form>
+  
+    <!-- Case Form -->
+    <!-- Case Form -->
+<form (ngSubmit)="addCase()" *ngIf="clientAdded">
+    <h3>Case Details</h3>
+  
+    <!-- Client dropdown -->
+    <label>
+      Select Client:
+      <select [(ngModel)]="selectedClientId" name="selectedClientId" required>
+        <option value="">-- Select Client --</option>
+        <option *ngFor="let client of clients" [value]="client.id">
+          {{ client.name }} - {{ client.email }}
+        </option>
+      </select>
+    </label>
+    <br />
+  
+    <!-- Other fields -->
+    <label>
+      Title:
+      <input type="text" [(ngModel)]="caseTitle" name="caseTitle" required />
+    </label>
+    <br />
+    <label>
+      Court:
+      <input type="text" [(ngModel)]="caseCourt" name="caseCourt" required />
+    </label>
+    <br />
+    <label>
+      Judge:
+      <input type="text" [(ngModel)]="caseJudge" name="caseJudge" required />
+    </label>
+    <br />
+    <label>
+      Case Type:
+      <input type="text" [(ngModel)]="caseType" name="caseType" required />
+    </label>
+    <br />
+    <label>
+        Case Number:
+        <input type="text" [(ngModel)]="caseNumber" name="caseNumber" required />
+      </label>
+      <br />
+    <label>
+      Status:
+      <select [(ngModel)]="caseStatus" name="caseStatus">
+        <option>Active</option>
+        <option>Closed</option>
+        <option>On Hold</option>
+      </select>
+    </label>
+    <br />
+    <button type="submit" [disabled]="loading">Add Case</button>
+  </form>
+  
+  </div>
+  

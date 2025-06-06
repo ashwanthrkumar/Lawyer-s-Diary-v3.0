@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <h3>Update Hearing Date</h3>
+  
+    <!-- Case selection -->
+    <div class="form-group">
+      <label for="caseSearch">Search and Select Case</label>
+      <input
+        type="text"
+        id="caseSearch"
+        class="form-control"
+        placeholder="Search by case name, number or client"
+        [(ngModel)]="caseSearchTerm"
+        (input)="filterCases()"
+      />
+      <select class="form-control mt-2" [(ngModel)]="selectedCaseId">
+        <option *ngFor="let case of filteredCases" [value]="case.id">
+          {{ case.title }} ({{ case.caseNumber || 'No Number' }}) - {{ case.clientName }}
+        </option>
+      </select>
+    </div>
+  
+    <!-- Hearing date input -->
+    <div class="form-group mt-3">
+      <label for="hearingDate">New Hearing Date</label>
+      <input type="date" class="form-control" id="hearingDate" [(ngModel)]="newHearingDate" />
+    </div>
+  
+    <!-- Submit button -->
+    <button class="btn btn-primary mt-3" (click)="updateHearingDate()">Update Hearing Date</button>
+  </div>
+  

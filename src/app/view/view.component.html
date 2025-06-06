@@ -1,0 +1,160 @@
+<div class="container mx-auto p-4 font-sans antialiased text-gray-800">
+    <h2 class="text-3xl font-bold text-center mb-6 capitalize">{{ type }} List</h2>
+  
+    <!-- Loading Indicator -->
+    <div *ngIf="loading" class="text-center text-lg font-medium text-blue-600 mb-4">Loading...</div>
+  
+    <!-- Table to display items -->
+    <div class="overflow-x-auto bg-white shadow-lg rounded-xl p-4">
+      <table class="min-w-full table-auto border-collapse">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <!-- Dynamic headers based on 'type' -->
+            <th *ngIf="type === 'clients'" class="py-3 px-4 text-left">Name</th>
+            <th *ngIf="type === 'clients'" class="py-3 px-4 text-left">Email</th>
+            <th *ngIf="type === 'clients'" class="py-3 px-4 text-left">Phone</th>
+  
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Title</th>
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Court</th>
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Status</th>
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Case Number</th>
+            <th *ngIf="type === 'cases'" class="py-3 px-4 text-left">Hearing Date</th>
+            
+            <th class="py-3 px-4 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items" class="border-b border-gray-200 hover:bg-gray-50">
+            <!-- Dynamic data cells based on 'type' -->
+            <td *ngIf="type === 'clients'" class="py-3 px-4">{{ item?.name }}</td>
+            <td *ngIf="type === 'clients'" class="py-3 px-4">{{ item?.email }}</td>
+            <td *ngIf="type === 'clients'" class="py-3 px-4">{{ item?.phone }}</td>
+  
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.title }}</td>
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.court }}</td>
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.status }}</td>
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.caseNumber }}</td>
+            <td *ngIf="type === 'cases'" class="py-3 px-4">{{ item?.hearingDate }}</td>
+            
+            <td class="py-3 px-4 flex space-x-2">
+              <!-- Edit button (opens custom edit modal) -->
+              <button
+                type="button"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
+                (click)="openEditModal(item)">
+                Edit
+              </button>
+              <!-- Delete button (opens custom confirmation modal) -->
+              <button
+                type="button"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
+                (click)="deleteItem(item)">
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="items.length === 0">
+            <td [attr.colspan]="type === 'clients' ? 4 : 4" class="py-4 px-4 text-center text-gray-500">
+              No {{ type }} found.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Custom Edit Modal -->
+    <div *ngIf="showEditModal" class="modal-backdrop">
+      <div class="modal-content-container">
+        <form class="modal-content-form" (ngSubmit)="saveEdit()">
+          <div class="modal-header-custom">
+            <h5 class="modal-title-custom">Edit {{ type | titlecase | slice:0:-1 }}</h5>
+            <button type="button" class="close-button-custom" (click)="closeEditModal()">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body-custom">
+            <!-- Add *ngIf="editItem" to ensure editItem is not null before accessing its properties -->
+            <div *ngIf="editItem">
+              <!-- Form fields for clients -->
+              <div *ngIf="type === 'clients'">
+                <div class="form-group-custom">
+                  <label for="nameInput" class="label-custom">Name</label>
+                  <input id="nameInput" class="input-custom" [(ngModel)]="editItem.name" name="name" required />
+                </div>
+                <div class="form-group-custom">
+                  <label for="emailInput" class="label-custom">Email</label>
+                  <input id="emailInput" class="input-custom" [(ngModel)]="editItem.email" name="email" type="email" />
+                </div>
+                <div class="form-group-custom">
+                  <label for="phoneInput" class="label-custom">Phone</label>
+                  <input id="phoneInput" class="input-custom" [(ngModel)]="editItem.phone" name="phone" />
+                </div>
+              </div>
+  
+              <!-- Form fields for cases -->
+              <div *ngIf="type === 'cases'">
+                <div class="form-group-custom">
+                  <label for="titleInput" class="label-custom">Title</label>
+                  <input id="titleInput" class="input-custom" [(ngModel)]="editItem.title" name="title" required />
+                </div>
+                <div class="form-group-custom">
+                  <label for="courtInput" class="label-custom">Court</label>
+                  <input id="courtInput" class="input-custom" [(ngModel)]="editItem.court" name="court" />
+                </div>
+                <div class="form-group-custom">
+                  <label for="statusInput" class="label-custom">Status</label>
+                  <input id="statusInput" class="input-custom" [(ngModel)]="editItem.status" name="status" />
+                </div>
+                <div class="form-group-custom">
+                  <label for="caseNumberInput" class="label-custom">Case Number</label>
+                  <input id="caseNumberInput" class="input-custom" [(ngModel)]="editItem.caseNumber" name="caseNumber" />
+                </div>
+                <div class="form-group-custom">
+                  <label for="hearingDateInput" class="label-custom">Hearing Date</label>
+                  <input id="hearingDateInput" type="date" class="input-custom" [(ngModel)]="editItem.hearingDate" name="hearingDate" />
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer-custom">
+            <button type="button" class="button-secondary-custom" (click)="closeEditModal()">
+              Cancel
+            </button>
+            <button type="submit" class="button-primary-custom">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Custom Confirmation Modal (for delete) -->
+    <div *ngIf="showConfirmModal" class="modal-backdrop">
+      <div class="modal-content-container">
+        <div class="modal-content-form">
+          <div class="modal-header-custom">
+            <h5 class="modal-title-custom">Confirm Deletion</h5>
+            <button type="button" class="close-button-custom" (click)="cancelDelete()">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body-custom">
+            <p>Are you sure you want to delete this {{ type | slice:0:-1 }}?</p>
+            <p class="font-semibold mt-2">
+              Item:
+              <span *ngIf="type === 'clients'">{{ itemToDelete?.name }}</span>
+              <span *ngIf="type === 'cases'">{{ itemToDelete?.title }}</span>
+            </p>
+          </div>
+          <div class="modal-footer-custom">
+            <button type="button" class="button-secondary-custom" (click)="cancelDelete()">
+              No
+            </button>
+            <button type="button" class="button-danger-custom" (click)="confirmDelete()">
+              Yes, Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

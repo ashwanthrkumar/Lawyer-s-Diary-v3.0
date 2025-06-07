@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/lawyers-diary",
+    "public": "dist/lawyers-diary/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

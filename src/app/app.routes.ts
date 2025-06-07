@@ -45,5 +45,5 @@ export const routes: Routes = [
   { path: 'calender', component: CalenderComponent, canActivate: [AuthGuard] },
 
   // ✅ Optional: Wildcard fallback route
-  //{ path: '**', redirectTo: 'auth' }
+  { path: '**', redirectTo: 'auth' }
 ];

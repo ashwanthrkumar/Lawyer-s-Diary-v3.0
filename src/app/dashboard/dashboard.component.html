@@ -44,7 +44,7 @@
     <!-- Wrap your table in this div for responsiveness -->
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
-        <thead class="table-dark">
+        <thead class="table-dark" style="background-color: #4c2c7c;">
           <tr>
             <th>Case Title</th>
             <th>Client Name</th>
@@ -60,7 +60,7 @@
             <td>{{ case.hearingDate | date: 'fullDate' }} {{ case.hearingTime || '' }}</td>
             <td>{{ case.court || '—' }}</td>
             <td>
-              <button class="btn btn-primary btn-sm" (click)="openCaseDetails(case)">View Details</button>
+              <button class="btn btn-primary btn-sm" (click)="openCaseDetails(case)" style="background-color: #a48440;">View Details</button>
             </td>
           </tr>
         </tbody>

@@ -21,16 +21,16 @@
                 <label>Confirm Password</label>
                 <input type="password" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" required>
               </div>
-      
-              <button type="submit" class="btn btn-primary w-100">
-                {{ isLoginMode ? 'Sign In' : 'Sign Up' }}
-              </button>
+      <button type="submit" class="btn w-100" [ngStyle]="{ 'background-color': '#4c2c7c', 'color': '#fff' }">
+  {{ isLoginMode ? 'Sign In' : 'Sign Up' }}
+</button>
+
             </form>
       
             <div class="text-center mt-3">
               <small>
                 {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
-                <a href="#" (click)="toggleMode($event)">
+                <a href="#" (click)="toggleMode($event)" style="color: #2f1c4c;">
                   {{ isLoginMode ? "Sign Up" : "Sign In" }}
                 </a>
               </small>

@@ -8,7 +8,7 @@
   <div class="overflow-x-auto bg-white shadow-lg rounded-xl p-4">
     <table class="min-w-full table-auto border-collapse">
       <thead class="bg-blue-600 text-white">
-        <tr>
+        <tr style="background-color: #4c2c7c;">
           <!-- Dynamic headers based on 'type' -->
           <th *ngIf="type === 'clients'" class="py-3 px-4 text-left">Name</th>
           <th *ngIf="type === 'clients'" class="py-3 px-4 text-left">Email</th>
@@ -40,7 +40,7 @@
             <!-- Edit button (opens custom edit modal) -->
             <button type="button"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
-              (click)="openEditModal(item)">
+              (click)="openEditModal(item)" style="background-color: #a48440;">
               Edit
             </button>
             <!-- Delete button (opens custom confirmation modal) -->
